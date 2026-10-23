@@ -8,7 +8,7 @@
   <style>
     :root { --sky: #6cd1f6; --rose: #d9476a; --text: #2b2b33; --muted: #7b7f8a; --line: #e6ecf2; }
     * { box-sizing: border-box; }
-    html { background: var(--sky); }
+    html { background: #fff; }
     body {
       margin: 0; padding: 0 16px 48px; color: var(--text); min-height: 100vh;
       font-family: "M PLUS Rounded 1c", -apple-system, "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif; font-weight: 500;
@@ -17,7 +17,7 @@
         #fdf7dc 0 11px, #ffffff 11px 22px, #fbe8ee 22px 33px, #ffffff 33px 44px,
         #d2effa 44px 55px, #ffffff 55px 66px, #fcecd8 66px 77px, #ffffff 77px 88px,
         #f0e8f8 88px 99px, #ffffff 99px 110px, #eefae6 110px 121px, #ffffff 121px 132px);
-      background-attachment: fixed;
+      background-attachment: scroll;
     }
     .wrap { max-width: 440px; margin: 0 auto; }
     .appbar { position: sticky; top: 0; z-index: 10; margin: 0 -16px 18px; padding: 0 16px; min-height: 84px;
@@ -25,7 +25,8 @@
     .appbar .title { font-size: 22px; font-weight: 800; letter-spacing: .04em; }
     .sub { color: var(--muted); font-size: 15px; margin: 0; padding: 14px 0 22px; text-align: center; }
     .card { background: #fff; border-radius: 22px; padding: 18px 16px; margin-bottom: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.10); }
-    #reader { width: 100%; border-radius: 16px; overflow: hidden; background: #000; min-height: 260px; }
+    #reader { width: 100%; border-radius: 16px; overflow: hidden; background: #000; min-height: 0; }
+    #reader:empty { display: none; }
     #reader video { width: 100% !important; border-radius: 16px; }
     button { width: 100%; font-size: 17px; font-weight: 800; padding: 14px; border-radius: 999px; border: none; color: #fff;
       background: var(--sky); box-shadow: 0 4px 12px rgba(0,0,0,.16); font-family: inherit; margin-top: 12px; }
@@ -36,6 +37,13 @@
     .footer { text-align: center; margin-top: 24px; font-size: 15px; color: var(--muted); }
     .footer a { color: var(--rose); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
     .hidden { display: none !important; }
+    .guide h2 { font-size: 16px; margin: 0 0 10px; color: var(--text); font-weight: 800; }
+    .guide ol { margin: 0; padding-left: 22px; font-size: 14px; line-height: 1.7; }
+    .guide li { margin-bottom: 6px; }
+    .guide .sec { margin-top: 16px; }
+    .guide .pill { display: inline-block; padding: 1px 10px; border-radius: 999px; color: #fff; font-size: 12px; font-weight: 800; vertical-align: middle; }
+    .guide .pill.in { background: var(--sky); } .guide .pill.out { background: var(--rose); }
+    .guide ul { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); line-height: 1.7; }
     #tokenBox { font-size: 12px; word-break: break-all; background: #f7fafc; border: 2px solid var(--line); border-radius: 12px; padding: 10px; margin-top: 10px; }
   </style>
 </head>
@@ -49,6 +57,36 @@
     <button id="startBtn">カメラを起動する</button>
     <div class="msg" id="msg"></div>
     <div class="note" style="margin-top:8px">カメラの許可を求められたら「許可」を選んでください。読み取れたら自動で出退勤ページに移動します。</div>
+  </div>
+
+
+  <!-- 使い方 -->
+  <div class="card guide">
+    <h2>使い方</h2>
+    <div class="sec">
+      <span class="pill in">出勤</span>
+      <ol style="margin-top:6px">
+        <li>「カメラを起動する」を押して、施設に掲示されているQRコードを読み取る</li>
+        <li>出退勤ページに移動したら、<b>ダンサーID</b>（運営から通知された数字）を入力して「IDを確認」</li>
+        <li>施設名と自分の名前を確認して「出勤」をタップ</li>
+      </ol>
+    </div>
+    <div class="sec">
+      <span class="pill out">退勤</span>
+      <ol style="margin-top:6px">
+        <li>出勤したときの画面を<b>そのまま残しておき</b>、終了時に同じ画面の「退勤」をタップ</li>
+        <li>画面を閉じてしまった場合は、もう一度ここからQRを読み取り、IDを入力して「退勤」を押せばOK</li>
+      </ol>
+    </div>
+    <div class="sec">
+      <h2 style="font-size:14px">ご注意</h2>
+      <ul>
+        <li>出退勤ページのアドレスには「script.google.com」と表示されますが、Joykuが用意した正規のページです</li>
+        <li>このページをブックマーク、またはホーム画面に追加しておくと次回から楽です</li>
+        <li>IDを入れても名前が出ない、ボタンが反応しないなどの場合は、無理に繰り返さず<b>出勤・退勤の時刻をメモ</b>して公式LINEへご連絡ください。運営で記録します</li>
+        <li>この期間の稼働はアプリ復旧後に運営で反映します</li>
+      </ul>
+    </div>
   </div>
 
   <!-- 登録モード（運営用：URL末尾に #reg を付けると表示） -->
